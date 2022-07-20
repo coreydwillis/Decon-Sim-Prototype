@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
+
+tw-passage {
+font-family: 'IBM Plex Mono', monospace;
+color: #FFB000;
+}
+.enchantment-link:hover, tw-link:hover {
+    color: #FFCC00;
+   }
+tw-link {color: #FFB000 !important; text-decoration:underline;}
+   tw-sidebar {
+    visibility: hidden
+   }
+   tw-sidebar tw-icon.redo {
+    display: none;
+   }
+   tw-sidebar tw-icon.undo {
+    display: none;
+   }
+tw-prompt {
+   width: 100%;
+   padding: 12px 20px;
+   margin: 8px 0;
+   box-sizing: border-box;
+}
