@@ -12,6 +12,7 @@ Decon Sim
 :: hal.tracks
 praise: ./audio/music/praise.mp3
 mystery: ./audio/music/mystery.mp3
+cosmic: ./audio/music/cosmic.mp3
 buzz: ./audio/buzz.wav
 
 :: Start
@@ -27,16 +28,15 @@ Side effects may include Decon 5.
 ]}
 
 :: Welcome
-(track: 'praise', 'play')
-(track: 'praise', 'loop', true)
-<h2>Welcome to Decon Sim</h2>
+<h2>Accessing Decon Sim</h2>
+(track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
 |line1)[Your full cooperation is appreciated]
 
-|line2)[After you enter your username, we will complete a biometrics scan]
+|line2)[Biometric authentication is required to access this secure simulation]
 
 |line3)[A set of Decon Cases will be assigned to you shortly]
 
-|line4)[[[Log in|login]]]
+|line4)[(text-style: "blink")[[[Log in|login]]]]
 {(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)
 (if:$debug is 1)[(set:$step1 to .25s)(set:$step2 to .5s)(set:$step3 to .75s)(set:$step4 to 1s)]
 (if:$debug is 0)[(set:$step1 to 1.5s)(set:$step2 to 3s)(set:$step3 to 6s)(set:$step4 to 8s)]
@@ -60,11 +60,14 @@ Side effects may include Decon 5.
 	(stop:)
 ]}}
 :: bioScan
-|line1)[<style>tw-story { background-color: red;}</style>]
-|line2)[<style>tw-story { background-color: blue;}</style>]
-|line3)[<style>tw-story { background-color: green;}</style>]
+
+
+<center>(text-rotate-x:-35)+(css: "font-size: 200%;")[<h1>Scanning Biometrics</h1>]</center>
+|line1)[<style>tw-story { background-color: green;}</style>]
+|line2)[<style>tw-story { background-color: purple;}</style>]
+|line3)[<style>tw-story { background-color: blue;}</style>]
 |line7)[[(goto: $lastPass)]]
-{(live: .25s)[
+{(live: 0s)[
 	(show: ?line1)
 	(stop:)
 ]}
@@ -72,11 +75,11 @@ Side effects may include Decon 5.
 	(show: ?line2)
 	(stop:)
 ]}
-{(live: .75s)[
+{(live: 1s)[
 	(show: ?line3)
 	(stop:)
 ]}
-{(live: 1s)[
+{(live: 1.5s)[
 	(show: ?line7)
 	(stop:)
 ]}
@@ -94,11 +97,11 @@ Side effects may include Decon 5.
 (if:$attempt is 0)[(set:$attempt to 1)]
 (if:$tryAgain is 2)[(set:$attempt to $attempt + 1)]
 (if:$userName is 0)[(set:$userName to (prompt:"Username", "default"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "default" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "tobymacfan93")),(set:$bioScanVar to 1),(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "tobymacfan93" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "aio-nova-hater87")),(set:$bioScanVar to 1),(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "aio-nova-hater87" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "gothard4life")),(set:$bioScanVar to 1),(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "gothard4life" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "larrythecucumberdildo")),(set:$bioScanVar to 1),(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "larrythecucumberdildo" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "bobbuttplug")),(set:$bioScanVar to 1),(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$userName is "default" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "tobymacfan93"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$userName is "tobymacfan93" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "aio-nova-hater87"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$userName is "aio-nova-hater87" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "gothard4life"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$userName is "gothard4life" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "larrythecucumberdildo"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$userName is "larrythecucumberdildo" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "bobbuttplug"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
 (if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)]
 (if:$userName is "bobbuttplug" or $tryAgain >= 4)[[Too many incorrect attempts. A random username will be generated|randomGen]]
 (if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[Scan Complete. Username matches biometrics.]
@@ -106,6 +109,7 @@ Side effects may include Decon 5.
 }
 :: randomGen
 (set:$userName to "johnnymac-sucks")
+<h2>Authentication</h2>
 Generating random username...
 
 |line1)[The random username "$userName" has been created for you.]
@@ -168,7 +172,7 @@ Hello $userName, we hope you are ready for today's tasks. Please choose one of t
 {(live: 13.25s)[
 	(show: ?decon6)
 	(stop:)
-]}
+](track: 'cosmic', 'fadeout', 2)(track: 'praise', 'fadein', 2)}
 
 :: trevor2
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
