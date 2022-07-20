@@ -1,3 +1,9 @@
 {
-    "twee3LanguageTools.storyformat.current": "harlowe-3"
+    "twee3LanguageTools.storyformat.current": "harlowe-3",
+    "cSpell.enableFiletypes": [
+        "twee3-harlowe-3"
+    ],
+    "cSpell.words": [
+        "Decon"
+    ]
 }

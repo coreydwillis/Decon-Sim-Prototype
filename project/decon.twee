@@ -128,7 +128,7 @@ Generating random username...
 ]}
 
 :: genmod
-<h2>Unathorized Access</h2>
+<h2>Unauthorized Access</h2>
 Hello $userName, you have been blocked from this system. You have repeated violations of spreading trust in logic, reason, and the scientific method, which conflict with our system.
 
 [[reboot|Start]]
@@ -174,12 +174,12 @@ Hello $userName, we hope you are ready for today's tasks. Please choose one of t
 :: trevor2
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
 <h2>Decon Case: Trevor Jones</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 Age: 19
 
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challeneged.
+You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
 
 [[Load Simulation|trevSim]]
 
@@ -190,7 +190,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
 
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challeneged.
+You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
 
 :: adam
 {(set:$deconFirst to "Adam")(set:$deconLast to "Taylor")(set:$Decon to 4)(set:$Faith to 4)}
@@ -199,7 +199,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
 
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challeneged.
+You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
 
 :: yolanda
 {(set:$deconFirst to "Yolanda")(set:$deconLast to "Smith")(set:$Decon to 4)(set:$Faith to 1)}
@@ -208,18 +208,40 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
 
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challeneged.
+You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
 
 :: trevSim
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
-<h3>Stats</h3>Decon: $Decon (out of 5)
-Faith: $Faith (out of 10)
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<h3>Stats</h3>Decon: $trevDecon (out of 5)
+Faith: $trevFaith (out of 10)
 
 After spending his highschool years in a Christian school, Trevor is heading off to a state university.
 
-Don't worry, $userName. This is only a simulation. Any choices you make are theorical and won't change the course of this young person's life.
+Don't worry, $userName. This is only a simulation. Any choices you make are theoretical and won't change the course of this young person's life.
 
 <hr>
-<b>Trevor is hanging out with some of his new classmates in the cafeteria. The subject of religon comes up and they ask him if he's religious.</b>
-[[Tell them that I'm a born again, Bible beleiving Christian.]]
+<b>Trevor is hanging out with some of his new classmates in the cafeteria. The subject of religion comes up and they ask him if he's religious.</b>
+
+Tell them that I'm a born again, [[Bible believing Christian|christian]]
+Tell them [[I'm a Christian.|christian]]
+Tell them [[I believe in God.|christian]]
+
+:: christian
+<h2>Decon Case: $deconFirst $deconLast</h2>
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<h3>Stats</h3>Decon: $trevDecon (out of 5)
+Faith: $trevFaith (out of 10)
+
+When Trevor's new friends were done talking about their religious affiliations, or lack there of, he was left with a weird sinking feeling in his stomach.
+
+[[Lose 1 Faith|trevfaith1]]
+
+:: trevfaith1
+(set: $trevFaith to $trevFaith - 1)
+<h2>Decon Case: $deconFirst $deconLast</h2>
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<h3>Stats</h3>Decon: $trevDecon (out of 5)
+Faith: $trevFaith (out of 10)
+
+Trevor feels okay now, but he is a little scared of what his new friends will think of him if they find out exactly how religious he is.
