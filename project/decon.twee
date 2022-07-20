@@ -14,9 +14,6 @@ praise: ./audio/music/praise.mp3
 mystery: ./audio/music/mystery.mp3
 buzz: ./audio/buzz.wav
 
-:: hal.config
-
-
 :: Start
 <h2>Trigger Warning</h2>
 Contains situations involving abuse and trauma.
