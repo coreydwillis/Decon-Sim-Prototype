@@ -175,8 +175,7 @@ Hello $userName, we hope you are ready for today's tasks. Please choose one of t
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
 <h2>Decon Case: Trevor Jones</h2>
 <img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
-<b>Stats</b>
-Decon: $trevDecon (out of 5)
+<h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 Age: 19
 
@@ -205,7 +204,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 :: yolanda
 {(set:$deconFirst to "Yolanda")(set:$deconLast to "Smith")(set:$Decon to 4)(set:$Faith to 1)}
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<b>Stats</b>
+<h3>Stats</h3>
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
 
@@ -214,6 +213,13 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 :: trevSim
 <h2>Decon Case: $deconFirst $deconLast</h2>
 <img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
-<b>Stats</b>
-Decon: $Decon (out of 5)
+<h3>Stats</h3>Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
+
+After spending his highschool years in a Christian school, Trevor is heading off to a state university.
+
+Don't worry, $userName. This is only a simulation. Any choices you make are theorical and won't change the course of this young person's life.
+
+<hr>
+<b>Trevor is hanging out with some of his new classmates in the cafeteria. The subject of religon comes up and they ask him if he's religious.</b>
+[[Tell them that I'm a born again, Bible beleiving Christian.]]
