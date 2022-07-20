@@ -137,7 +137,7 @@ Hello $userName, you have been blocked from this system. You have repeated viola
 <h2>Initiation</h2>
 Hello $userName, we hope you are ready for today's tasks. Please choose one of the following Decon Cases to begin.
 
-|decon1)[[[Trevor Jones (Low Decon Risk)|trevor]]]
+|decon1)[[[Trevor Jones (Low Decon Risk)|trevor2]]]
 
 |decon2)[[[Rachel Stevens (Moderate Decon Risk)|rachel]]]
 
@@ -171,7 +171,7 @@ Hello $userName, we hope you are ready for today's tasks. Please choose one of t
 	(stop:)
 ]}
 
-:: trevor
+:: trevor2
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
 <h2>Decon Case: Trevor Jones</h2>
 <img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
@@ -186,7 +186,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 
 :: rachel
 {(set:$deconFirst to "Rachel")(set:$deconLast to "Stevens")(set:$Decon to 3)(set:$Faith to 7)}
-<h2>Decon Case: Trevor Jones</h2>
+<h2>Decon Case: $deconFirst $deconLast</h2>
 <b>Stats</b>
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
@@ -195,7 +195,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 
 :: adam
 {(set:$deconFirst to "Adam")(set:$deconLast to "Taylor")(set:$Decon to 4)(set:$Faith to 4)}
-<h2>Decon Case: Trevor Jones</h2>
+<h2>Decon Case: $deconFirst $deconLast</h2>
 <b>Stats</b>
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
@@ -213,7 +213,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 
 :: trevSim
 <h2>Decon Case: $deconFirst $deconLast</h2>
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
 <b>Stats</b>
 Decon: $Decon (out of 5)
 Faith: $Faith (out of 10)
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
