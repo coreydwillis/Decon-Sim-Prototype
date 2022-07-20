@@ -15,8 +15,52 @@ mystery: ./audio/music/mystery.mp3
 cosmic: ./audio/music/cosmic.mp3
 buzz: ./audio/buzz.wav
 
+:: hal.config
+showControls: true
+reload: false
+sidebarStartClosed: true
+volumeDisplay: false
+startingVol: 0.50
+muteOnBlur: true
+persistPrefs: true
+trackLoadLimit: 400
+totalLoadLimit: 6000
+debug: false
+
+
+
+::fullscreen
+(set: $leaveCredits to (history:)'s last)
+<script>A.controls.close()</script>
+[(goto:$leaveCredits)]
+
+:: about
+<h2>About Decon Sim</h2>
+Have you ever worried that a family member, friend, or colleague would reach Decon 5? This simulation was built so that we can define models, procedures, and guidance to keep people from the path to full Decon.
+{{<script>A.controls.close()</script>}
+(set: $leaveAbout to (history:)'s last)}
+[[[Return|$leaveAbout]]]
+
+:: credits
+<h2>Credits</h2>
+<h3>Writer & Director</h3>
+Corey Willis
+
+<h3>Art Direction</h3>
+TBD
+
+<h3>Music By</h3>
+TBD
+(set: $leaveCredits to (history:)'s last)
+|line1)[[[Return|$leaveCredits]]]
+<script>A.controls.close()</script>
+{(live: 1s)[
+	(show: ?line1)
+	(stop:)
+]}
+
 :: Start
-<h2>Trigger Warning</h2>
+<h2>Warning</h2>
 Contains situations involving abuse and trauma.
 
 Side effects may include Decon 5.
@@ -27,8 +71,22 @@ Side effects may include Decon 5.
 	(stop:)
 ]}
 
+:: Header[header]
+(unless: (passage:)'s tags contains "no-header")[
+<center>(text-rotate-y:-20)+(text-rotate-x:+35)+(css: "font-size: 350%;")[Decon Sim]</center>
+<hr>
+]
+
+:: Footer[footer]
+(unless: (passage:)'s tags contains "no-header")[
+<br/><br/>
+<hr>
+(icon-fullscreen:"Fullscreen")
+
+]
+
 :: Welcome
-<h2>Accessing Decon Sim</h2>
+<h2>Loading Simulation...</h2>
 (track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
 |line1)[Your full cooperation is appreciated]
 
@@ -59,9 +117,9 @@ Side effects may include Decon 5.
 	(show: ?line4)
 	(stop:)
 ]}}
-:: bioScan
 
-
+:: bioScan[no-header]
+<br/><br/><br/><br/><br/><br/><br/>
 <center>(text-rotate-x:-35)+(css: "font-size: 200%;")[<h1>Scanning Biometrics</h1>]</center>
 |line1)[<style>tw-story { background-color: green;}</style>]
 |line2)[<style>tw-story { background-color: purple;}</style>]
@@ -93,7 +151,7 @@ Side effects may include Decon 5.
 </script>
 <h2>Authentication</h2>
 {
-(if:$userName is "geneticallymodifiedskeptic" or $userName is "geneticallymodified" or $userName is "GeneticallyModified" or $userName is "Genetically Modified" or $userName is "Genetically Modified Skeptic")[[[Unauthorized access has been detected and reported|genmod]][(set:$auth to 0)]]
+{(if:$userName is "geneticallymodifiedskeptic" or $userName is "geneticallymodified" or $userName is "GeneticallyModified" or $userName is "Genetically Modified" or $userName is "Genetically Modified Skeptic")[[[Unauthorized access has been detected and reported|genmod]][(set:$auth to 0)]]
 (if:$attempt is 0)[(set:$attempt to 1)]
 (if:$tryAgain is 2)[(set:$attempt to $attempt + 1)]
 (if:$userName is 0)[(set:$userName to (prompt:"Username", "default"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
@@ -106,7 +164,7 @@ Side effects may include Decon 5.
 (if:$userName is "bobbuttplug" or $tryAgain >= 4)[[Too many incorrect attempts. A random username will be generated|randomGen]]
 (if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[Scan Complete. Username matches biometrics.]
 (if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[[Start initiation|initiation]]
-}
+}}
 :: randomGen
 (set:$userName to "johnnymac-sucks")
 <h2>Authentication</h2>
@@ -117,18 +175,7 @@ Generating random username...
 |line2)[Securing new biometric data...]
 
 |line3)[[[Proceed to initiation|initiation]]]
-{(live: 2.5s)[
-	(show: ?line1)
-	(stop:)
-]}
-{(live: 5s)[
-	(show: ?line2)
-	(stop:)
-]}
-{(live: 8s)[
-	(show: ?line3)
-	(stop:)
-]}
+{{{(live: 2.5s)[(show: ?line1)(stop:)]}{(live: 5s)[(show: ?line2)(stop:)]}{(live: 8s)[(show: ?line3)(stop:)]}}}\
 
 :: genmod
 <h2>Unauthorized Access</h2>
@@ -140,44 +187,19 @@ Hello $userName, you have been blocked from this system. You have repeated viola
 <h2>Initiation</h2>
 Hello $userName, we hope you are ready for today's tasks. Please choose one of the following Decon Cases to begin.
 
-|decon1)[[[Trevor Jones (Low Decon Risk)|trevor2]]]
-
-|decon2)[[[Rachel Stevens (Moderate Decon Risk)|rachel]]]
-
-|decon3)[[[Adam Taylor (High Decon Risk)|adam]]]
-
+|decon1)[[[Trevor Jones (Low Decon Risk)|trevor2]]][<br/>]{
+|decon2)[[[Rachel Stevens (Moderate Decon Risk)|rachel]]][<br/>]
+|decon3)[[[Adam Taylor (High Decon Risk)|adam]]][<br/>]
 |decon4)[[[Yolanda Smith (<b>Imminent Decon Risk</b>)|yolanda]][<style>tw-story { background-color: red;} tw-passage {color: red;} tw-link {color: red !important; }</style>][(track: 'buzz', 'play')][(track: 'praise', 'stop')]]
-|decon5)[[<style>tw-story { background-color: black;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important;}</style>]]
-|decon6)[(track: 'mystery', 'play')(track: 'mystery', 'loop', true)]
-{(live: 1.5s)[
-	(show: ?decon1)
-	(stop:)
-]}
-{(live: 3s)[
-	(show: ?decon2)
-	(stop:)
-]}
-{(live: 4.5s)[
-	(show: ?decon3)
-	(stop:)
-]}
-{(live: 10s)[
-	(show: ?decon4)
-	(stop:)
-]}
-{(live: 10.25s)[
-	(show: ?decon5)
-	(stop:)
-]}
-{(live: 13.25s)[
-	(show: ?decon6)
-	(stop:)
-](track: 'cosmic', 'fadeout', 2)(track: 'praise', 'fadein', 2)}
+{{|decon5)[[<style>tw-story { background-color: black;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important;}</style>]]}}
+{[{|decon6)[(track: 'mystery', 'play')(track: 'mystery', 'loop', true)]}]}
+{{(live: 1.5s)[	(show: ?decon1)	(stop:)]}{(live: 3s)[(show: ?decon2)(stop:)]}{(live: 4.5s)[(show: ?decon3)(stop:)]}{(live: 10s)[(show: ?decon4)(stop:)]}{(live: 10.25s)[(show: ?decon5)(stop:)]}{(live: 13.25s)[(show: ?decon6)(stop:)](track: 'cosmic', 'fadeout', 2)(track: 'praise', 'fadein', 2)}}
+}
 
 :: trevor2
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
 <h2>Decon Case: Trevor Jones</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 Age: 19
@@ -232,7 +254,7 @@ Tell them [[I believe in God.|christian]]
 
 :: christian
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
@@ -243,7 +265,7 @@ When Trevor's new friends were done talking about their religious affiliations, 
 :: trevfaith1
 (set: $trevFaith to $trevFaith - 1)
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
