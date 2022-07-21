@@ -8,6 +8,9 @@ user-select: none;
 -webkit-user-select: none; /* Safari */        
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none; /* IE10+/Edge */
+   min-width:1080px;        /* Suppose you want minimum width of 1000px */
+   width: auto !important;  /* Firefox will set width as auto */
+   width:1080px;            /* As IE6 ignores !important it will set width as 1000px; */
 }
 
 hr {

@@ -29,10 +29,22 @@ debug: false
 
 :: about
 <h2>About Decon Sim</h2>
-Have you ever worried that a family member, friend, or colleague would reach Decon 5? This simulation was built so that we can define models, procedures, and guidance to keep people from the path to full Decon.
-{{<script>A.controls.close()</script>}
-(set: $leaveAbout to (history:)'s last)}
-[[[Return|$leaveAbout]]]
+<b>What is Decon Sim?</b>
+Have you ever worried that a family member, friend, or colleague would reach Decon 5? This simulation was built so that we can define models, procedures, and guidance to keep people from the path to full Decon.<br/>
+
+<b>Why does this user such ancient graphics?</b>
+The computational power needed to run our sophistic AI system for handling all of the Decon cases necessitates that we save resources in nonessential places, such as the graphics for this interface.<br/>
+
+<b>How do you pronounce Decon?</b>
+Dee-Con<br/>
+
+<b>Is Decon an abbreviation?</b>
+<-Put something that will stop them from asking more questions while still not really answering it.->
+
+[[[Return|$leaveExtras]]]
+<script>A.controls.close()</script>
+(set: $leaveExtras2 to (history:)'s last)
+(if: $leaveExtras2 is not "about" and $leaveExtras2 is not "credits")[(set: $leaveExtras to (history:)'s last)]
 
 :: credits
 <h2>Credits</h2>
@@ -44,8 +56,9 @@ TBD
 
 <h3>Music By</h3>
 TBD
-(set: $leaveCredits to (history:)'s last)
-|line1)[[[Return|$leaveCredits]]]
+(set: $leaveExtras2 to (history:)'s last)
+(if: $leaveExtras2 is not "about" and $leaveExtras2 is not "credits")[(set: $leaveExtras to (history:)'s last)]
+|line1)[[[Return|$leaveExtras]]]
 <script>A.controls.close()</script>
 {(live: 1s)[
 	(show: ?line1)
@@ -53,17 +66,14 @@ TBD
 ]}
 
 :: Start
-<h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:25%;height:25%;">}
+<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:20%;height:20%;">}
 
 Contains situations involving abuse and trauma.
 
-Side effects may include Decon 5.
 
-|line1)[[[Agree to Continue|Welcome]]]
-{(live: 2s)[
-	(show: ?line1)
-	(stop:)
-]}
+<i>Side effects may include increasing your Decon level, or even reaching Decon 5.</i><br/>
+
+[[[Agree to Continue|Welcome]]]</center>
 
 :: Header[header]
 (unless: (passage:)'s tags contains "no-header")[
@@ -76,11 +86,11 @@ Side effects may include Decon 5.
 <br/><br/>
 <hr>
 (icon-fullscreen:"Fullscreen")
-{(replace: "Decon")[<b>(text-rotate-y:-40)+(text-rotate-x:+30)+(css: "font-size: 125%;")[**Decon**]</b>]}
+<!--{(replace: "Decon")[<b>(text-rotate-y:-40)+(text-rotate-x:+30)+(css: "font-size: 125%;")[**Decon**]</b>]}-->
 ]
 
 :: Welcome
-
+{(set: $returnExtra to 1)}
 <h2>Loading Simulation...</h2>
 (track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
 |line1)[Your full cooperation is appreciated]
@@ -115,10 +125,10 @@ Side effects may include Decon 5.
 
 :: bioScan[no-header]
 <br/><br/><br/><br/><br/><br/><br/>
-<center>(text-rotate-x:-35)+(css: "font-size: 200%;")[<h1>Scanning Biometrics</h1>]</center>
-|line1)[<style>tw-story { background-color: green;}</style>]
-|line2)[<style>tw-story { background-color: purple;}</style>]
-|line3)[<style>tw-story { background-color: blue;}</style>]
+<center>(text-rotate-x:-35)+(css: "font-size: 200%; color: black;")[<h1>Scanning Biometrics</h1>]</center>
+|line1)[<style>tw-story { background-color: #5c4004;}</style>]
+|line2)[<style>tw-story { background-color: #c78f18;}</style>]
+|line3)[<style>tw-story { background-color: #ffb619;}</style>]
 |line7)[[(goto: $lastPass)]]
 {(live: 0s)[
 	(show: ?line1)
@@ -155,7 +165,7 @@ Side effects may include Decon 5.
 (if:$userName is "aio-nova-hater87" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "gothard4life"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
 (if:$userName is "gothard4life" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "larrythecucumberdildo"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
 (if:$userName is "larrythecucumberdildo" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "bobbuttplug"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)]
+(if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)][(track: 'buzz', 'play')]
 (if:$userName is "bobbuttplug" or $tryAgain >= 4)[[Too many incorrect attempts. A random username will be generated|randomGen]]
 (if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[Scan Complete. Username matches biometrics.]
 (if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[[Start initiation|initiation]]
@@ -170,7 +180,7 @@ Generating random username...
 |line2)[Securing new biometric data...]
 
 |line3)[[[Proceed to initiation|initiation]]]
-{{{(live: 2.5s)[(show: ?line1)(stop:)]}{(live: 5s)[(show: ?line2)(stop:)]}{(live: 8s)[(show: ?line3)(stop:)]}}}\
+{{{(live: 2.5s)[(show: ?line1)(stop:)]}{(live: 5s)[(show: ?line2)(stop:)]}{(live: 8s)[(show: ?line3)(stop:)]}}}
 
 :: genmod
 <h2>Unauthorized Access</h2>
