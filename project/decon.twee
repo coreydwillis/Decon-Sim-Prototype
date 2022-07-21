@@ -27,13 +27,6 @@ trackLoadLimit: 400
 totalLoadLimit: 6000
 debug: false
 
-
-
-::fullscreen
-(set: $leaveCredits to (history:)'s last)
-<script>A.controls.close()</script>
-[(goto:$leaveCredits)]
-
 :: about
 <h2>About Decon Sim</h2>
 Have you ever worried that a family member, friend, or colleague would reach Decon 5? This simulation was built so that we can define models, procedures, and guidance to keep people from the path to full Decon.
@@ -82,17 +75,18 @@ Side effects may include Decon 5.
 <br/><br/>
 <hr>
 (icon-fullscreen:"Fullscreen")
-
+{(replace: "Decon")[<b>**Dogcon**</b>]}
 ]
 
 :: Welcome
+
 <h2>Loading Simulation...</h2>
 (track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
 |line1)[Your full cooperation is appreciated]
 
 |line2)[Biometric authentication is required to access this secure simulation]
 
-|line3)[A set of Decon Cases will be assigned to you shortly]
+[A set of Decon Cases will be assigned to you shortly]
 
 |line4)[(text-style: "blink")[[[Log in|login]]]]
 {(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)
