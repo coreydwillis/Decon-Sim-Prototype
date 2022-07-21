@@ -53,7 +53,8 @@ TBD
 ]}
 
 :: Start
-<h2>Warning</h2>
+<h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:25%;height:25%;">}
+
 Contains situations involving abuse and trauma.
 
 Side effects may include Decon 5.
@@ -75,7 +76,7 @@ Side effects may include Decon 5.
 <br/><br/>
 <hr>
 (icon-fullscreen:"Fullscreen")
-{(replace: "Decon")[<b>**Dogcon**</b>]}
+{(replace: "Decon")[<b>(text-rotate-y:-40)+(text-rotate-x:+30)+(css: "font-size: 125%;")[**Decon**]</b>]}
 ]
 
 :: Welcome
@@ -86,7 +87,7 @@ Side effects may include Decon 5.
 
 |line2)[Biometric authentication is required to access this secure simulation]
 
-[A set of Decon Cases will be assigned to you shortly]
+|line3)[A set of Decon Cases will be assigned to you shortly]
 
 |line4)[(text-style: "blink")[[[Log in|login]]]]
 {(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)
@@ -231,7 +232,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 
 :: trevSim
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:25%;height:25%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
@@ -248,7 +249,7 @@ Tell them [[I believe in God.|christian]]
 
 :: christian
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
@@ -259,7 +260,7 @@ When Trevor's new friends were done talking about their religious affiliations, 
 :: trevfaith1
 (set: $trevFaith to $trevFaith - 1)
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
