@@ -30,6 +30,76 @@ tw-icon[title=“Undo”], tw-icon[title=“Redo”] {
 
 tw-dialog-links tw-link {
 	color: #FFB000;
+   border-color: #FFB000;
+}
+
+tw-dialog-links {
+	color: #FFB000;
+   border-color: #FFB000;
+}
+
+tw-story input[type=text] {
+   padding: 1px 2px;
+   color: #FFB000;
+   border-color: #FFB000;
+   border-style:solid;
+}
+
+tw-story input:focus {
+   color: #FFB000;
+   border-color: #FFB000;
+   border-style:dotted ;
+   outline-color: #FFB000;
+   outline-width: 0px;
+}
+input[type=text]:focus {
+   border: 2px solid rgb(197, 140, 18);
+ }
+
+.input:focus {
+   border:1px solid #FFB000;
+   color: #FFB000;
+   outline-color: #FFB000;
+   outline-width: 3px;
+ }
+
+ tw-story textarea:focus { 
+   border-color: #FFB000;
+   outline-color: #FFB000;
+   outline-width: 0px;
+   size: 2px;
+}
+
+tw-story input[type=selected] {
+   padding: 1px 2px;
+   color: #FFB000;
+   border-color: #FFB000;
+   border-style:dotted ;
+   outline-color: #FFB000;
+   size: 2px;
+}
+
+tw-dialog {
+   z-index: 999997;
+   position: fixed;
+   left: auto;
+   right: auto;
+   bottom: auto;
+   top: auto;
+   border: #FFB000 solid 10px;
+   padding: 2em;
+   color: #FFB000;
+   accent-color: #FFB000;
+   background-color: #000;
+   display: block;
+   max-width: 50vw;
+   max-height: 75vh;
+   overflow: hidden;
+}
+
+tw-story input[type=text] {
+   border-color: #FFB000;
+   color: #FFB000;
 }
 
 hr {

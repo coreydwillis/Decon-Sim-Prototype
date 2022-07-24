@@ -49,6 +49,7 @@ Dee-Con<br/>
 :: credits
 <h2>Credits</h2>
 <h3>Writer & Director</h3>
+<img src="images/corey.jpg" alt="Corey Willis" style="width:15%;height:15%;">
 Corey Willis
 
 <h3>Art Direction</h3>
@@ -67,23 +68,29 @@ TBD
 
 ::userSearch
 <h2>User Search</h2>
-(set: $leaveExtras2 to (history:)'s last)
+{{(set: $leaveExtras2 to (history:)'s last)
 (if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
 {<script>A.controls.close()</script>
-(set:$userSearch to (prompt:"Seach for User", "", "", "Submit"))
-(if: $userSearch is $userName)[This is your username. Please search for a different username.]}
+(set:$userSearch to (prompt:"Seach for User", "", "", "Submit"))}
+{(if: $userSearch is $userName)[This is your username. Please search for a different username.]}}
 (if: $users contains $userSearch)[(v6m-print: (source: $userSearch)) is a valid username. [[Click here|userProfile]] to visit the user profile.]
-(if: $users does not contain $userSearch)[(v6m-print: (source: $userSearch)) is not a valid username.]
+(if: $users does not contain $userSearch)[(v6m-print: (source: $userSearch)) is not a valid username.]}
+
+[[New Search|userSearch]]
 [[Return|$leaveExtras]]
 
 ::userProfile
 <h2>(v6m-print: (source: $userSearch)) User Profile</h2>
-{(set:$defaultProfile to "This is a default user that was created by the system. It does not contain anything interesting or noteworthy.")}
-{(if: $userSearch is "default")[(set: $userProfileText to $defaultProfile)]}
-$userProfileText
-[[Return to Search|userSearch]]
+(print: (text: "$" + $userSearch))
 
-::news
+(set: $leaveExtras2 to (history:)'s last)
+(if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
+<script>A.controls.close()</script>
+
+[[Return to Search|userSearch]]
+[[Return to Original Page|$leaveExtras]]
+
+:: news
 <h2>News</h2>
 {{{(set: $leaveExtras2 to (history:)'s last)
 (if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
@@ -96,11 +103,13 @@ News feed is coming soon.
 {{(set: $exampleCharacter to (dm: "Strength", 11,"Dexterity", 16,"Constitution", 13,"Intelligence", 15,"Wisdom", 16,"Charisma", 18))
 {(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)(set:$attempt to 0)(set:$tryAgain to 0)(set:$authSucc to 0)}
 {(set: $users to (array:"default","tobymacfan93","aio-nova-hater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
+{(set: $default to (dm:"Name","NA","Age","NA","Gender","NA","Interests","NA","Position","NA","Habbits","NA.","Background","This is the default user that was created by the system. There is no interesting or useful information here."))}
+{(set: $tobymacfan93 to (dm:"Name","Franz Day","Age","31","Gender","Male","Interests","Hiking, skiing, devotionals, and CCM.","Position","Lead QA","Habbits","Takes long lunch breaks, shows up late, and watches secular music videos.","Background","Franz is a faithful servant who is a blessing to everyone around them."))}
 {(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic","coreydwillis"))}
 {(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}
 (set: $exampleCharacter's Strength to $exampleCharacter's Strength -1)
 (set:_strength to $exampleCharacter's Strength)}}
-<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:20%;height:20%;">}
+<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:15%;height:15%;">}
 Contains situations involving abuse and trauma.
 
 
@@ -183,15 +192,15 @@ Contains situations involving abuse and trauma.
 (set: $lastPass to (history:)'s last)
 
 :: login
-<h2>Authentication</h2>
 {{(if:$blockedUsers contains $userName)[[[Unauthorized access has been detected and reported|blocked]][(set:$auth to 0)]]
 (if:$attempt is 0)[(set:$attempt to 1)]
 (if:$tryAgain is 2)[(set:$attempt to $attempt + 1)]
 (if:$userName is not 0 and $users does not contain $userName)[(set: $authSucc to 1)]
-(if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)][(track: 'buzz', 'play')]]
+(if:$users contains $userName)[(set:$tryAgain to 1)][(if:$attempt is > 1)[(track: 'buzz', 'play')]]
 (if:$attempt is <= ($users)'s length and $authSucc is 0)[(set:$userName to (prompt:"Username", $users's $attempt, "", "Submit"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
 (if:$attempt is > ($users)'s length)[[Too many incorrect attempts. A random username will be generated|randomGen]]
-(if:$userName is not 0 and $users does not contain $userName and $auth is 1)[[Start initiation|initiation]]
+(if:$userName is not 0 and $users does not contain $userName and $auth is 1)[[Authentication successful.] [[Start initiation|initiation]]]
+(set:$disPage to "randomGen")
 }}
 
 :: randomGen
@@ -200,7 +209,7 @@ Contains situations involving abuse and trauma.
 Generating random username...
 
 |line1)[The random username (v6m-print: (source: $userName)) has been created for you.]
-<img src="images/johnnymac.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
+<img src="images/johnny.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 |line2)[Securing new biometric data...]
 
 |line3)[[[Proceed to initiation|initiation]]]
@@ -210,7 +219,18 @@ Generating random username...
 <h2>Unauthorized Access</h2>
 Hello (v6m-print: (source: $userName)), you have been blocked from this system. You have repeated violations of spreading trust in logic, reason, and the scientific method, which conflict with our system.
 {(set: $userName to 0)(set: $auth to 0)}
-[[reboot|Start]]
+[[reboot]]
+
+:: reboot
+<br/><br/>
+
+Rebooting system...
+|line1)[[(goto: $goToP)]]
+(set:$goToP to "Start")
+{(live: 2.5s)[
+	(show: ?line1)
+	(stop:)
+]}
 
 :: initiation
 <h2>Initiation</h2>
@@ -228,7 +248,7 @@ Hello (v6m-print: (source: $userName)), we hope you are ready for today's tasks.
 :: trevor2
 {(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
 <h2>Decon Case: Trevor Jones</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:50%;height:50%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 Age: 19
@@ -266,7 +286,7 @@ You are tasked with simulating various decisions that could keep $deconFirst fro
 
 :: trevSim
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
@@ -283,7 +303,7 @@ Tell them [[I believe in God.|christian]]
 
 :: christian
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
@@ -294,7 +314,7 @@ When Trevor's new friends were done talking about their religious affiliations, 
 :: trevfaith1
 (set: $trevFaith to $trevFaith - 1)
 <h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:35%;height:35%;">
+<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 <h3>Stats</h3>Decon: $trevDecon (out of 5)
 Faith: $trevFaith (out of 10)
 
