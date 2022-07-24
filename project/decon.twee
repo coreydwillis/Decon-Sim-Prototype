@@ -41,10 +41,10 @@ Dee-Con<br/>
 <b>Is Decon an abbreviation?</b>
 <-Put something that will stop them from asking more questions while still not really answering it.->
 
-[[[Return|$leaveExtras]]]
-<script>A.controls.close()</script>
+{<script>A.controls.close()</script>}
 (set: $leaveExtras2 to (history:)'s last)
-(if: $leaveExtras2 is not "about" and $leaveExtras2 is not "credits")[(set: $leaveExtras to (history:)'s last)]
+(if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
+[[[Return|$leaveExtras]]]
 
 :: credits
 <h2>Credits</h2>
@@ -57,7 +57,7 @@ TBD
 <h3>Music By</h3>
 TBD
 (set: $leaveExtras2 to (history:)'s last)
-(if: $leaveExtras2 is not "about" and $leaveExtras2 is not "credits")[(set: $leaveExtras to (history:)'s last)]
+(if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
 |line1)[[[Return|$leaveExtras]]]
 <script>A.controls.close()</script>
 {(live: 1s)[
@@ -65,9 +65,42 @@ TBD
 	(stop:)
 ]}
 
-:: Start
-<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:20%;height:20%;">}
+::userSearch
+<h2>User Search</h2>
+(set: $leaveExtras2 to (history:)'s last)
+(if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
+{<script>A.controls.close()</script>
+(set:$userSearch to (prompt:"Seach for User", "", "", "Submit"))
+(if: $userSearch is $userName)[This is your username. Please search for a different username.]}
+(if: $users contains $userSearch)[(v6m-print: (source: $userSearch)) is a valid username. [[Click here|userProfile]] to visit the user profile.]
+(if: $users does not contain $userSearch)[(v6m-print: (source: $userSearch)) is not a valid username.]
+[[Return|$leaveExtras]]
 
+::userProfile
+<h2>(v6m-print: (source: $userSearch)) User Profile</h2>
+{(set:$defaultProfile to "This is a default user that was created by the system. It does not contain anything interesting or noteworthy.")}
+{(if: $userSearch is "default")[(set: $userProfileText to $defaultProfile)]}
+$userProfileText
+[[Return to Search|userSearch]]
+
+::news
+<h2>News</h2>
+{{{(set: $leaveExtras2 to (history:)'s last)
+(if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
+<script>A.controls.close()</script>}}}
+News feed is coming soon.
+
+[[Return|$leaveExtras]]
+
+:: Start
+{{(set: $exampleCharacter to (dm: "Strength", 11,"Dexterity", 16,"Constitution", 13,"Intelligence", 15,"Wisdom", 16,"Charisma", 18))
+{(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)(set:$attempt to 0)(set:$tryAgain to 0)(set:$authSucc to 0)}
+{(set: $users to (array:"default","tobymacfan93","aio-nova-hater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
+{(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic","coreydwillis"))}
+{(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}
+(set: $exampleCharacter's Strength to $exampleCharacter's Strength -1)
+(set:_strength to $exampleCharacter's Strength)}}
+<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:20%;height:20%;">}
 Contains situations involving abuse and trauma.
 
 
@@ -100,8 +133,7 @@ Contains situations involving abuse and trauma.
 |line3)[A set of Decon Cases will be assigned to you shortly]
 
 |line4)[(text-style: "blink")[[[Log in|login]]]]
-{(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)
-(if:$debug is 1)[(set:$step1 to .25s)(set:$step2 to .5s)(set:$step3 to .75s)(set:$step4 to 1s)]
+{(if:$debug is 1)[(set:$step1 to .25s)(set:$step2 to .5s)(set:$step3 to .75s)(set:$step4 to 1s)]
 (if:$debug is 0)[(set:$step1 to 1.5s)(set:$step2 to 3s)(set:$step3 to 6s)(set:$step4 to 8s)]
 {(live: $step1)[
 	(show: ?line1)
@@ -151,51 +183,43 @@ Contains situations involving abuse and trauma.
 (set: $lastPass to (history:)'s last)
 
 :: login
-<script>
-
-</script>
 <h2>Authentication</h2>
-{
-{(if:$userName is "geneticallymodifiedskeptic" or $userName is "geneticallymodified" or $userName is "GeneticallyModified" or $userName is "Genetically Modified" or $userName is "Genetically Modified Skeptic")[[[Unauthorized access has been detected and reported|genmod]][(set:$auth to 0)]]
+{{(if:$blockedUsers contains $userName)[[[Unauthorized access has been detected and reported|blocked]][(set:$auth to 0)]]
 (if:$attempt is 0)[(set:$attempt to 1)]
 (if:$tryAgain is 2)[(set:$attempt to $attempt + 1)]
-(if:$userName is 0)[(set:$userName to (prompt:"Username", "default"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "default" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "tobymacfan93"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "tobymacfan93" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "aio-nova-hater87"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "aio-nova-hater87" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "gothard4life"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "gothard4life" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "larrythecucumberdildo"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "larrythecucumberdildo" and $tryAgain is 1)[(set:$userName to (prompt:"Username", "bobbuttplug"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
-(if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)][(track: 'buzz', 'play')]
-(if:$userName is "bobbuttplug" or $tryAgain >= 4)[[Too many incorrect attempts. A random username will be generated|randomGen]]
-(if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[Scan Complete. Username matches biometrics.]
-(if:$userName is not "default" and is not "tobymacfan93" and is not "aio-nova-hater87" and is not "gothard4life" and is not "larrythecucumberdildo" and is not "bobbuttplug" and $auth is 1)[[Start initiation|initiation]]
+(if:$userName is not 0 and $users does not contain $userName)[(set: $authSucc to 1)]
+(if:$userName is "default" or $userName is "tobymacfan93" or $userName is "aio-nova-hater87" or $userName is "gothard4life" or $userName is "larrythecucumberdildo")[[[Scan Complete. Username does not match biometrics, please try again|login]][(set:$tryAgain to 1)][(track: 'buzz', 'play')]]
+(if:$attempt is <= ($users)'s length and $authSucc is 0)[(set:$userName to (prompt:"Username", $users's $attempt, "", "Submit"))(set:$bioScanVar to 1)(if:$bioScanVar is 1)[(goto: "bioScan")]]
+(if:$attempt is > ($users)'s length)[[Too many incorrect attempts. A random username will be generated|randomGen]]
+(if:$userName is not 0 and $users does not contain $userName and $auth is 1)[[Start initiation|initiation]]
 }}
+
 :: randomGen
 (set:$userName to "johnnymac-sucks")
 <h2>Authentication</h2>
 Generating random username...
 
-|line1)[The random username "$userName" has been created for you.]
-
+|line1)[The random username (v6m-print: (source: $userName)) has been created for you.]
+<img src="images/johnnymac.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
 |line2)[Securing new biometric data...]
 
 |line3)[[[Proceed to initiation|initiation]]]
 {{{(live: 2.5s)[(show: ?line1)(stop:)]}{(live: 5s)[(show: ?line2)(stop:)]}{(live: 8s)[(show: ?line3)(stop:)]}}}
 
-:: genmod
+:: blocked
 <h2>Unauthorized Access</h2>
-Hello $userName, you have been blocked from this system. You have repeated violations of spreading trust in logic, reason, and the scientific method, which conflict with our system.
-
+Hello (v6m-print: (source: $userName)), you have been blocked from this system. You have repeated violations of spreading trust in logic, reason, and the scientific method, which conflict with our system.
+{(set: $userName to 0)(set: $auth to 0)}
 [[reboot|Start]]
 
 :: initiation
 <h2>Initiation</h2>
-Hello $userName, we hope you are ready for today's tasks. Please choose one of the following Decon Cases to begin.
+Hello (v6m-print: (source: $userName)), we hope you are ready for today's tasks. Please choose one of the following Decon Cases to begin.
 
 |decon1)[[[Trevor Jones (Low Decon Risk)|trevor2]]][<br/>]{
 |decon2)[[[Rachel Stevens (Moderate Decon Risk)|rachel]]][<br/>]
 |decon3)[[[Adam Taylor (High Decon Risk)|adam]]][<br/>]
-|decon4)[[[Yolanda Smith (<b>Imminent Decon Risk</b>)|yolanda]][<style>tw-story { background-color: red;} tw-passage {color: red;} tw-link {color: red !important; }</style>][(track: 'buzz', 'play')][(track: 'praise', 'stop')]]
+|decon4)[[[Yolanda Smith (<b>Imminent Decon Risk</b>)|yolanda]][<style>tw-story { background-color: #FFB000;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important; }</style>][(track: 'buzz', 'play')][(track: 'praise', 'stop')]]
 {{|decon5)[[<style>tw-story { background-color: black;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important;}</style>]]}}
 {[{|decon6)[(track: 'mystery', 'play')(track: 'mystery', 'loop', true)]}]}
 {{(live: 1.5s)[	(show: ?decon1)	(stop:)]}{(live: 3s)[(show: ?decon2)(stop:)]}{(live: 4.5s)[(show: ?decon3)(stop:)]}{(live: 10s)[(show: ?decon4)(stop:)]}{(live: 10.25s)[(show: ?decon5)(stop:)]}{(live: 13.25s)[(show: ?decon6)(stop:)](track: 'cosmic', 'fadeout', 2)(track: 'praise', 'fadein', 2)}}
@@ -248,7 +272,7 @@ Faith: $trevFaith (out of 10)
 
 After spending his highschool years in a Christian school, Trevor is heading off to a state university.
 
-Don't worry, $userName. This is only a simulation. Any choices you make are theoretical and won't change the course of this young person's life.
+Don't worry, (v6m-print: (source: $userSearch)). This is only a simulation. Any choices you make are theoretical and won't change the course of this young person's life.
 
 <hr>
 <b>Trevor is hanging out with some of his new classmates in the cafeteria. The subject of religion comes up and they ask him if he's religious.</b>

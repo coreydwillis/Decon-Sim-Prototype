@@ -1,16 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
 
 tw-passage {
-user-select: none
-font-family: 'IBM Plex Mono', monospace;
-color: #FFB000;
-user-select: none; 
--webkit-user-select: none; /* Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+/Edge */
+   width:100%;
+   user-select: none;
+   font-family: 'IBM Plex Mono', monospace;
+   color: #FFB000;
+   user-select: none; 
+   -webkit-user-select: none; /* Safari */        
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* IE10+/Edge */
    min-width:1080px;        /* Suppose you want minimum width of 1000px */
    width: auto !important;  /* Firefox will set width as auto */
    width:1080px;            /* As IE6 ignores !important it will set width as 1000px; */
+}
+
+tw-story {
+   width:100%;
+   padding: 5% 10%;
+}
+
+tw-sidebar {
+	display: none;
+   visibility: hidden
+}
+
+tw-icon[title=“Undo”], tw-icon[title=“Redo”] {
+   display: none;
+}
+
+tw-dialog-links tw-link {
+	color: #FFB000;
 }
 
 hr {
@@ -27,7 +46,9 @@ hr {
 }
 
 .enchantment-link:hover, tw-link:hover {
-    color: #FFCC00;
+    color: #000000;
+    background: #000000;
+    background-color: #fdc243;
    }
 tw-link {color: #FFB000 !important; text-decoration:underline;}
 tw-icon[alt="Undo"], tw-icon[alt="Redo"] {
