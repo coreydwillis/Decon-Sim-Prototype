@@ -73,15 +73,34 @@ TBD
 {<script>A.controls.close()</script>
 (set:$userSearch to (prompt:"Seach for User", "", "", "Submit"))}
 {(if: $userSearch is $userName)[This is your username. Please search for a different username.]}}
-(if: $users contains $userSearch)[(v6m-print: (source: $userSearch)) is a valid username. [[Click here|userProfile]] to visit the user profile.]
-(if: $users does not contain $userSearch)[(v6m-print: (source: $userSearch)) is not a valid username.]}
+(if: $allUsers contains $userSearch)[(v6m-print: (source: $userSearch)) is a valid username. [[Click here|userProfile]] to visit the user profile.]
+(if: $allUsers does not contain $userSearch)[(v6m-print: (source: $userSearch)) is not a valid username.]}
 
 [[New Search|userSearch]]
 [[Return|$leaveExtras]]
 
 ::userProfile
+{(if:$profileCheck is 0 and $userSearch is "trevorjones")[(set:$profileCheck to 1)]}
 <h2>(v6m-print: (source: $userSearch)) User Profile</h2>
-(print: (text: "$" + $userSearch))
+<b>Picture</b>
+{<script>
+function myFunction(){
+    var id2 = $userSearch + ".jpg";
+    document.getElementById('qr_img').src = document.getElementById('qr_img').src + id2;
+}
+myFunction();
+</script>
+<br/>
+<img id="qr_img" src="images/" style="width:25%;height:25%;"/>}
+{<hr>}
+<div class="leftcolumn">
+<b>Details</b>
+(print: (text: "$" + $userSearch + "Data"))
+</div>
+<div class="rightcolumn">
+<b>Stats</b>
+(print: (text: "$" + $userSearch + "Stats"))
+</div>
 
 (set: $leaveExtras2 to (history:)'s last)
 (if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
@@ -100,15 +119,24 @@ News feed is coming soon.
 [[Return|$leaveExtras]]
 
 :: Start
-{{(set: $exampleCharacter to (dm: "Strength", 11,"Dexterity", 16,"Constitution", 13,"Intelligence", 15,"Wisdom", 16,"Charisma", 18))
-{(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)(set:$attempt to 0)(set:$tryAgain to 0)(set:$authSucc to 0)}
+{{(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)(set:$attempt to 0)(set:$tryAgain to 0)(set:$authSucc to 0)(set:$trevAnsw to '')}
+<script>A.menu.links.hide("User Search")</script>
+<script>A.menu.links.hide("News")</script>
+<script>A.menu.links.hide("About")</script>
+<script>A.menu.links.hide("Credits")</script>
 {(set: $users to (array:"default","tobymacfan93","aio-nova-hater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
-{(set: $default to (dm:"Name","NA","Age","NA","Gender","NA","Interests","NA","Position","NA","Habbits","NA.","Background","This is the default user that was created by the system. There is no interesting or useful information here."))}
-{(set: $tobymacfan93 to (dm:"Name","Franz Day","Age","31","Gender","Male","Interests","Hiking, skiing, devotionals, and CCM.","Position","Lead QA","Habbits","Takes long lunch breaks, shows up late, and watches secular music videos.","Background","Franz is a faithful servant who is a blessing to everyone around them."))}
-{(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic","coreydwillis"))}
-{(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}
-(set: $exampleCharacter's Strength to $exampleCharacter's Strength -1)
-(set:_strength to $exampleCharacter's Strength)}}
+{(set: $deconUsers to (array:"trevorjones","rachel"))}
+{(set: $allUsers to ($users + $deconUsers))}
+<!--Star of User Stats and Data Datamaps-->
+(set: $defaultStats to (dm: "Decon","na","Design","na","Authority","na","Responsibility","na","Suffering","na","Ownership","na","Freedom","na","Success","na"))
+{(set: $defaultData to (dm:"Name","NA","Age","NA","Gender","NA","Interests","NA","Position","NA","Habbits","NA.","Background","This is the default user that was created by the system. There is no interesting or useful information here."))}
+(set: $tobymacfan93Stats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
+{(set: $tobymacfan93Data to (dm:"Name","Franzy Day","Age","31","Gender","Male","Interests","Hiking, skiing, devotionals, and CCM.","Position","Lead QA","Habits","Takes long lunch breaks, shows up late, and watches secular music videos.","Background","Franz is a faithful servant who is a blessing to everyone around them."))}
+(set: $trevorjonesStats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
+{(set: $trevorjonesData to (dm:"Name","Trevor Jones","Age","18","Gender","Male","Interests","Church ministry, football, saxophone.","Position", "na","Habits","Masturbation problem.","Background","Trevor is a good old boy."))}
+<!--End of User Stats and Data Datamaps-->
+{(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic"))}
+{(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}}
 <center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:15%;height:15%;">}
 Contains situations involving abuse and trauma.
 
@@ -134,7 +162,10 @@ Contains situations involving abuse and trauma.
 :: Welcome
 {(set: $returnExtra to 1)}
 <h2>Loading Simulation...</h2>
-(track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
+(unless: (track: 'cosmic', 'isplaying'))[
+	(track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
+]
+
 |line1)[Your full cooperation is appreciated]
 
 |line2)[Biometric authentication is required to access this secure simulation]
@@ -234,88 +265,29 @@ Rebooting system...
 
 :: initiation
 <h2>Initiation</h2>
-Hello (v6m-print: (source: $userName)), we hope you are ready for today's tasks. Please choose one of the following Decon Cases to begin.
+Hello (v6m-print: (source: $userName)), we hope you are ready for today's tasks. The following Decon Cases have been assigned to you. We will start with Trevor as this should serve as a good tutorial.
 
 |decon1)[[[Trevor Jones (Low Decon Risk)|trevor2]]][<br/>]{
-|decon2)[[[Rachel Stevens (Moderate Decon Risk)|rachel]]][<br/>]
-|decon3)[[[Adam Taylor (High Decon Risk)|adam]]][<br/>]
-|decon4)[[[Yolanda Smith (<b>Imminent Decon Risk</b>)|yolanda]][<style>tw-story { background-color: #FFB000;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important; }</style>][(track: 'buzz', 'play')][(track: 'praise', 'stop')]]
+|decon2)[Rachel Stevens (Moderate Decon Risk)][<br/>]
+|decon3)[Adam Taylor (High Decon Risk)][<br/>]
+|decon4)[[Yolanda Smith (<b>Imminent Decon Risk</b>)][<style>tw-story { background-color: #FFB000;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important; }</style>][(track: 'buzz', 'play')][(track: 'praise', 'stop')]]
 {{|decon5)[[<style>tw-story { background-color: black;} tw-passage {color: #FFB000;} tw-link {color: #FFB000 !important;}</style>]]}}
-{[{|decon6)[(track: 'mystery', 'play')(track: 'mystery', 'loop', true)]}]}
-{{(live: 1.5s)[	(show: ?decon1)	(stop:)]}{(live: 3s)[(show: ?decon2)(stop:)]}{(live: 4.5s)[(show: ?decon3)(stop:)]}{(live: 10s)[(show: ?decon4)(stop:)]}{(live: 10.25s)[(show: ?decon5)(stop:)]}{(live: 13.25s)[(show: ?decon6)(stop:)](track: 'cosmic', 'fadeout', 2)(track: 'praise', 'fadein', 2)}}
+{[{|decon6)[(unless: (track: 'mystery', 'isplaying'))[(track: 'mystery', 'play')(track: 'mystery', 'loop', true)]]}]}
+{{(live: 1.5s)[	(show: ?decon1)	(stop:)]}{(live: 3s)[(show: ?decon2)(stop:)]}{(live: 4.5s)[(show: ?decon3)(stop:)]}{(live: 10s)[(show: ?decon4)(stop:)]}{(live: 10.5s)[(show: ?decon5)(stop:)]}{(live: 13.25s)[(show: ?decon6)(stop:)](track: 'cosmic', 'fadeout', 2)(unless: (track:'praise', "isplaying"))[(track: 'praise', 'fadein', 2)]}}
 }
 
 :: trevor2
-{(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")(set:$trevDecon to 2)(set:$trevFaith to 9)}
+{(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")
+{<script>A.menu.links.show("User Search")</script>}}
 <h2>Decon Case: Trevor Jones</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
-<h3>Stats</h3>Decon: $trevDecon (out of 5)
-Faith: $trevFaith (out of 10)
-Age: 19
-
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
-
-[[Load Simulation|trevSim]]
-
-:: rachel
-{(set:$deconFirst to "Rachel")(set:$deconLast to "Stevens")(set:$Decon to 3)(set:$Faith to 7)}
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<b>Stats</b>
-Decon: $Decon (out of 5)
-Faith: $Faith (out of 10)
-
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
-
-:: adam
-{(set:$deconFirst to "Adam")(set:$deconLast to "Taylor")(set:$Decon to 4)(set:$Faith to 4)}
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<b>Stats</b>
-Decon: $Decon (out of 5)
-Faith: $Faith (out of 10)
-
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
-
-:: yolanda
-{(set:$deconFirst to "Yolanda")(set:$deconLast to "Smith")(set:$Decon to 4)(set:$Faith to 1)}
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<h3>Stats</h3>
-Decon: $Decon (out of 5)
-Faith: $Faith (out of 10)
-
-You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon level 5. Keep $deconFirst below Decon 5 to succeed. The lower their faith, the higher the chance that their Decon level will rise when challenged.
-
-:: trevSim
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
-<h3>Stats</h3>Decon: $trevDecon (out of 5)
-Faith: $trevFaith (out of 10)
-
-After spending his highschool years in a Christian school, Trevor is heading off to a state university.
-
-Don't worry, (v6m-print: (source: $userSearch)). This is only a simulation. Any choices you make are theoretical and won't change the course of this young person's life.
-
-<hr>
-<b>Trevor is hanging out with some of his new classmates in the cafeteria. The subject of religion comes up and they ask him if he's religious.</b>
-
-Tell them that I'm a born again, [[Bible believing Christian|christian]]
-Tell them [[I'm a Christian.|christian]]
-Tell them [[I believe in God.|christian]]
-
-:: christian
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
-<h3>Stats</h3>Decon: $trevDecon (out of 5)
-Faith: $trevFaith (out of 10)
-
-When Trevor's new friends were done talking about their religious affiliations, or lack there of, he was left with a weird sinking feeling in his stomach.
-
-[[Lose 1 Faith|trevfaith1]]
-
-:: trevfaith1
-(set: $trevFaith to $trevFaith - 1)
-<h2>Decon Case: $deconFirst $deconLast</h2>
-<img src="images/trevor.jpg" alt="Trevor Jones" style="width:15%;height:15%;">
-<h3>Stats</h3>Decon: $trevDecon (out of 5)
-Faith: $trevFaith (out of 10)
-
-Trevor feels okay now, but he is a little scared of what his new friends will think of him if they find out exactly how religious he is.
+{(if:$profileCheck is 0)[You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon 5.
+<br/>
+First you should visit their profile to gather information about them. You can use the <b>User Search</b> function on the left hand navigation to look up the profile using the "trevor" keyword.]
+(else:)[
+	(if:$pop is 0)[(set:$trevAnsw to (prompt:"What is Trevor's habit?", "", "", "Submit"))
+]]
+(if: $profileCheck is 1 and $trevAnsw does not contain "masterbat" and $trevAnsw does not contain "Masterbat")[
+Incorrect answer. [[Please try again]], or visit their profile again to retrieve the required information.
+]
+<!--(if: $profileCheck is 1 and $trevAnsw does not contain "masterbat" and $trevAnsw does not contain "Masterbat")[(set:$trevAnsw to (prompt:"Incorrect. What is Trevor's habit?","", "Cancel", "Submit"))[(set:$pop to 1)][(goto: "trevor2")]]-->
+(if:$trevAnsw contains "masterbat" or $trevAnsw contains "Masterbat")[You have answered the question correctly.]}

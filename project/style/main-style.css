@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap');
 
 tw-passage {
-   width:100%;
+   margin: 0px auto;
    user-select: none;
    font-family: 'IBM Plex Mono', monospace;
    color: #FFB000;
@@ -12,6 +12,7 @@ tw-passage {
    min-width:1080px;        /* Suppose you want minimum width of 1000px */
    width: auto !important;  /* Firefox will set width as auto */
    width:1080px;            /* As IE6 ignores !important it will set width as 1000px; */
+   max-width: 50%;
 }
 
 tw-story {
@@ -129,4 +130,14 @@ tw-prompt {
    padding: 12px 20px;
    margin: 8px 0;
    box-sizing: border-box;
+}
+
+.leftcolumn {
+	float: left;
+  	width: 50%;
+  	margin-right: 10%;
+}
+
+.rightcolumn {
+ 	margin-left: 50%; 
 }
