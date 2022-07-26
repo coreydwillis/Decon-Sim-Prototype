@@ -113,18 +113,27 @@ myFunction();
 <h2>News</h2>
 {{{(set: $leaveExtras2 to (history:)'s last)
 (if: $sidePages does not contain $leaveExtras2)[(set: $leaveExtras to (history:)'s last)]
-<script>A.controls.close()</script>}}}
-News feed is coming soon.
+<script>A.controls.close()</script>}
+(for: each _news, ...$newsArticles)[
+<details>
+	<summary>
+	(if: $count is 0)[(set: $count to $newsArticles's length + 1)]
+	(set:$count to $count - 1)
+    <b><u>(css: "font-size: 125%")[(print: $newsTitles's $count)]</u></b>
+    <span class="icon">+</span>
+  </summary>
+	(print: $newsArticles's $count)
+	<br/><br/>
+</details>](set: $count to 0)}}
 
 [[Return|$leaveExtras]]
 
 :: Start
 {{(set:$auth to 1)(set:$userName to 0)(set:$debug to 1)(set:$attempt to 0)(set:$tryAgain to 0)(set:$authSucc to 0)(set:$trevAnsw to '')}
 <script>A.menu.links.hide("User Search")</script>
-<script>A.menu.links.hide("News")</script>
 <script>A.menu.links.hide("About")</script>
 <script>A.menu.links.hide("Credits")</script>
-{(set: $users to (array:"default","tobymacfan93","aio-nova-hater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
+{(set: $users to (array:"default","tobymacfan93","aionovahater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
 {(set: $deconUsers to (array:"trevorjones","rachel"))}
 {(set: $allUsers to ($users + $deconUsers))}
 <!--Star of User Stats and Data Datamaps-->
@@ -132,9 +141,23 @@ News feed is coming soon.
 {(set: $defaultData to (dm:"Name","NA","Age","NA","Gender","NA","Interests","NA","Position","NA","Habbits","NA.","Background","This is the default user that was created by the system. There is no interesting or useful information here."))}
 (set: $tobymacfan93Stats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
 {(set: $tobymacfan93Data to (dm:"Name","Franzy Day","Age","31","Gender","Male","Interests","Hiking, skiing, devotionals, and CCM.","Position","Lead QA","Habits","Takes long lunch breaks, shows up late, and watches secular music videos.","Background","Franz is a faithful servant who is a blessing to everyone around them."))}
+(set: $aionovahater87Stats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
+{(set: $aionovahater87Data to (dm:"Name","Trevor Jones","Age","18","Gender","Male","Interests","Church ministry, football, saxophone.","Position", "na","Habits","Masturbation problem.","Background","Trevor is a good old boy."))}
+(set: $gothard4lifeStats to (dm:"Decon", 1,"Design", 10,"Authority", 8,"Responsibility", 6,"Suffering", 10,"Ownership", 2,"Freedom",1,"Success",7))
+{(set: $gothard4lifeData to (dm:"Name","Tim Draper","Age","27","Gender","Male","Interests","Children's ministry","Habits","Always late for morning service.","Background","He is from one of the good families. Faithful, giving, and hardworking."))}
 (set: $trevorjonesStats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
 {(set: $trevorjonesData to (dm:"Name","Trevor Jones","Age","18","Gender","Male","Interests","Church ministry, football, saxophone.","Position", "na","Habits","Masturbation problem.","Background","Trevor is a good old boy."))}
-<!--End of User Stats and Data Datamaps-->
+<!--News Feed-->
+{(set: $newsArticles to (array:"1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam ut venenatis tellus in metus vulputate eu. At volutpat diam ut venenatis tellus in. Amet nulla facilisi morbi tempus. Eu ultrices vitae auctor eu augue ut lectus arcu bibendum. Imperdiet dui accumsan sit amet nulla facilisi. Elementum curabitur vitae nunc sed velit dignissim sodales. Imperdiet dui accumsan sit amet nulla. Mauris a diam maecenas sed enim ut sem viverra aliquet. Vulputate eu scelerisque felis imperdiet proin. Sociis natoque penatibus et magnis. Posuere morbi leo urna molestie at. Ultricies lacus sed turpis tincidunt id aliquet risus. Sit amet dictum sit amet justo donec. Consectetur a erat nam at lectus urna. Sed viverra ipsum nunc aliquet bibendum. In hac habitasse platea dictumst quisque. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Accumsan lacus vel facilisis volutpat est. Et sollicitudin ac orci phasellus egestas tellus rutrum tellus. A cras semper auctor neque vitae tempus. Faucibus nisl tincidunt eget nullam non. Dolor purus non enim praesent elementum facilisis. Nec ultrices dui sapien eget mi proin sed libero enim. Magna etiam tempor orci eu lobortis. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Arcu dui vivamus arcu felis bibendum ut tristique et. Tellus at urna condimentum mattis pellentesque. Proin libero nunc consequat interdum varius sit. Aliquam faucibus purus in massa tempor nec. Leo integer malesuada nunc vel risus commodo viverra.",
+ "2Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit. Risus viverra adipiscing at in tellus integer feugiat. Eu facilisis sed odio morbi quis commodo. Mattis nunc sed blandit libero volutpat sed cras ornare arcu. Est ultricies integer quis auctor elit sed vulputate mi sit. Accumsan lacus vel facilisis volutpat est velit. Massa tempor nec feugiat nisl. Faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc congue nisi vitae suscipit tellus mauris a. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Donec massa sapien faucibus et molestie ac feugiat sed. Tempor orci dapibus ultrices in iaculis. In cursus turpis massa tincidunt dui ut. Mi tempus imperdiet nulla malesuada pellentesque elit. Arcu dui vivamus arcu felis bibendum. Laoreet non curabitur gravida arcu ac tortor. Hac habitasse platea dictumst quisque sagittis purus. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Turpis egestas sed tempus urna et pharetra pharetra massa. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Lorem ipsum dolor sit amet. Sollicitudin tempor id eu nisl nunc mi. Adipiscing elit ut aliquam purus sit amet luctus venenatis. Consequat id porta nibh venenatis cras sed. Euismod lacinia at quis risus sed vulputate. Et malesuada fames ac turpis egestas. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Risus quis varius quam quisque id diam vel quam elementum. Quam nulla porttitor massa id neque aliquam. Ante metus dictum at tempor commodo. Eget nunc lobortis mattis aliquam."
+,"3Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit. Risus viverra adipiscing at in tellus integer feugiat. Eu facilisis sed odio morbi quis commodo. Mattis nunc sed blandit libero volutpat sed cras ornare arcu. Est ultricies integer quis auctor elit sed vulputate mi sit. Accumsan lacus vel facilisis volutpat est velit. Massa tempor nec feugiat nisl. Faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc congue nisi vitae suscipit tellus mauris a. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Donec massa sapien faucibus et molestie ac feugiat sed. Tempor orci dapibus ultrices in iaculis. In cursus turpis massa tincidunt dui ut. Mi tempus imperdiet nulla malesuada pellentesque elit. Arcu dui vivamus arcu felis bibendum. Laoreet non curabitur gravida arcu ac tortor. Hac habitasse platea dictumst quisque sagittis purus. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Turpis egestas sed tempus urna et pharetra pharetra massa. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Lorem ipsum dolor sit amet. Sollicitudin tempor id eu nisl nunc mi. Adipiscing elit ut aliquam purus sit amet luctus venenatis. Consequat id porta nibh venenatis cras sed. Euismod lacinia at quis risus sed vulputate. Et malesuada fames ac turpis egestas. Ultricies tristique nulla aliquet enim tortor at auctor urna nunc. Risus quis varius quam quisque id diam vel quam elementum. Quam nulla porttitor massa id neque aliquam. Ante metus dictum at tempor commodo. Eget nunc lobortis mattis aliquam."))}
+(set: $newsTitles to (array:"Everyone is Talking about Decon Sim", "7 Tips for Happiness", "The Recent Surge in Decon and What it Means"))
+
+(set: $badNews1Txt to (array:"A local man testified in court today that Decon Sim has been using elligal mind control and conditioning software."))
+(set: $badNews1Tit to (array:"Local Man Testifies in Case Against Decon Sim"))
+<!--Blockers Users-->
+{(set: $newsArray to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic"))}
+{(set: $newsData to (dm:"Name","Trevor Jones","Age","18","Gender","Male","Interests","Church ministry, football, saxophone.","Position", "na","Habits","Masturbation problem.","Background","Trevor is a good old boy."))}
 {(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic"))}
 {(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}}
 <center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:15%;height:15%;">}
@@ -277,17 +300,18 @@ Hello (v6m-print: (source: $userName)), we hope you are ready for today's tasks.
 }
 
 :: trevor2
-{(set:$deconFirst to "Trevor")(set:$deconLast to "Jones")
-{<script>A.menu.links.show("User Search")</script>}}
+{<script>A.menu.links.show("User Search")</script>}
 <h2>Decon Case: Trevor Jones</h2>
-{(if:$profileCheck is 0)[You are tasked with simulating various decisions that could keep $deconFirst from reaching Decon 5.
+{(if:$profileCheck is 0)[You are tasked with simulating various decisions that could keep Trevor from reaching Decon 5.
 <br/>
-First you should visit their profile to gather information about them. You can use the <b>User Search</b> function on the left hand navigation to look up the profile using the "trevor" keyword.]
+First you should visit their profile to gather information about them. You can use the <b>User Search</b> function on the left hand navigation to look up the profile using the "trevorjones" keyword. Feel free to check out the News while you're at it.]
 (else:)[
-	(if:$pop is 0)[(set:$trevAnsw to (prompt:"What is Trevor's habit?", "", "", "Submit"))
+	(if:$pop is 0 and $trevq is 0)[(set:$trevAnsw to (prompt:"What is Trevor's habit?", "", "", "Submit"))
 ]]
 (if: $profileCheck is 1 and $trevAnsw does not contain "masterbat" and $trevAnsw does not contain "Masterbat")[
-Incorrect answer. [[Please try again]], or visit their profile again to retrieve the required information.
+Incorrect answer. [[Please try again|trevor2]], or visit their profile again to retrieve the required information.
 ]
-<!--(if: $profileCheck is 1 and $trevAnsw does not contain "masterbat" and $trevAnsw does not contain "Masterbat")[(set:$trevAnsw to (prompt:"Incorrect. What is Trevor's habit?","", "Cancel", "Submit"))[(set:$pop to 1)][(goto: "trevor2")]]-->
-(if:$trevAnsw contains "masterbat" or $trevAnsw contains "Masterbat")[You have answered the question correctly.]}
+
+(if:$trevAnsw contains "masterbat" or $trevAnsw contains "Masterbat")[
+	You have answered the question correctly. A new news article has been added to the feed.
+		(set:$trevq to 1)[(set: $newsTitles to $newsTitles + $badNews1Tit)(set: $newsArticles to $newsArticles + $badNews1Txt)]]}
