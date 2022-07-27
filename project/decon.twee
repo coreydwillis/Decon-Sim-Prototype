@@ -14,6 +14,7 @@ praise: ./audio/music/praise.mp3
 mystery: ./audio/music/mystery.mp3
 cosmic: ./audio/music/cosmic.mp3
 buzz: ./audio/buzz.wav
+notif: ./audio/notif.wav
 
 :: hal.config
 showControls: true
@@ -136,7 +137,7 @@ myFunction();
 {(set: $users to (array:"default","tobymacfan93","aionovahater87","gothard4life","larrythecucumberdildo","bobbuttplug","strongbad69","saladfingersyobutt"))}
 {(set: $deconUsers to (array:"trevorjones","rachel"))}
 {(set: $allUsers to ($users + $deconUsers))}
-<!--Star of User Stats and Data Datamaps-->
+<!--Start of User Stats and Data Datamaps-->
 (set: $defaultStats to (dm: "Decon","na","Design","na","Authority","na","Responsibility","na","Suffering","na","Ownership","na","Freedom","na","Success","na"))
 {(set: $defaultData to (dm:"Name","NA","Age","NA","Gender","NA","Interests","NA","Position","NA","Habbits","NA.","Background","This is the default user that was created by the system. There is no interesting or useful information here."))}
 (set: $tobymacfan93Stats to (dm:"Decon", 1,"Design", 11,"Authority", 16,"Responsibility", 13,"Suffering", 15,"Ownership", 16,"Freedom",18,"Success",5))
@@ -178,16 +179,25 @@ Contains situations involving abuse and trauma.
 (unless: (passage:)'s tags contains "no-header")[
 <br/><br/>
 <hr>
-(icon-fullscreen:"Fullscreen")
+{(if:(passage:)'s name is not "Start")[(link:"Save Progress")[(if:(save-game:"Slot A", "Introductions"))[Game saved!
+  ](else: )[
+    Sorry, I couldn't save your game.
+  ]
+]]
+
+(if: (saved-games:) contains "Slot A")[
+  (link: "Load Progress")[(load-game:"Slot A")]
+]}]
+
+(link-fullscreen: "Turn fullscreen on", "Turn fullscreen off", "Fullscreen unavailable")
 <!--{(replace: "Decon")[<b>(text-rotate-y:-40)+(text-rotate-x:+30)+(css: "font-size: 125%;")[**Decon**]</b>]}-->
-]
 
 :: Welcome
-{(set: $returnExtra to 1)}
+{{(set: $returnExtra to 1)}
 <h2>Loading Simulation...</h2>
 (unless: (track: 'cosmic', 'isplaying'))[
 	(track: 'cosmic', 'play')(track: 'cosmic', 'loop', true)
-]
+]}
 
 |line1)[Your full cooperation is appreciated]
 
@@ -313,5 +323,5 @@ Incorrect answer. [[Please try again|trevor2]], or visit their profile again to 
 ]
 
 (if:$trevAnsw contains "masterbat" or $trevAnsw contains "Masterbat")[
-	You have answered the question correctly. A new news article has been added to the feed.
-		(set:$trevq to 1)[(set: $newsTitles to $newsTitles + $badNews1Tit)(set: $newsArticles to $newsArticles + $badNews1Txt)]]}
+	You have answered the question correctly.(set:$trevq to 1)[(if:$newsTitles does not contain ($badNews1Tit)'s 1st)[(set: $newsTitles to $newsTitles + $badNews1Tit)(set: $newsArticles to $newsArticles + $badNews1Txt)(notify: '3s')[News Feed Updated](track: 'notif', 'play')]]]
+	}
