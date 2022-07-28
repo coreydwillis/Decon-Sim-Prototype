@@ -21,11 +21,11 @@ jobs:
 
       - name: Set game configuration
         env:
-          APP_NAME: Decon 5
+          APP_NAME: Decon Sim
           DESCRIPTION: An decon game.
 
           # This must be of the format "N.N.N", where the N's are all numbers
-          VERSION: 0.0.1137
+          VERSION: 0.0.0114
 
           # By default, the author will be your name on GitHub. You can manually change this.
           AUTHOR: ${{ github.repository_owner }}
@@ -58,7 +58,7 @@ jobs:
       - name: Check out Electron app template
         uses: actions/checkout@v2
         with:
-          repository: coreydwillis/electron-wrapper/testing
+          repository: https://github.com/coreydwillis/electron-wrapper/tree/testing
           ref: v0.1
           path: app
 
