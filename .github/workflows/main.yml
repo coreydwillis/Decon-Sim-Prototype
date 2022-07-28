@@ -58,7 +58,7 @@ jobs:
       - name: Check out Electron app template
         uses: actions/checkout@v2
         with:
-          repository: coreydwillis/electron-wrapper/tree/testing
+          repository: coreydwillis/electron-wrapper
           ref: v0.1
           path: app
 
