@@ -161,7 +161,7 @@ myFunction();
 {(set: $newsData to (dm:"Name","Trevor Jones","Age","18","Gender","Male","Interests","Church ministry, football, saxophone.","Position", "na","Habits","Masturbation problem.","Background","Trevor is a good old boy."))}
 {(set: $blockedUsers to (array:"geneticallymodifiedskeptic","geneticallymodified","Genetically Modified","Genetically Modified Skeptic"))}
 {(set: $sidePages to (array:"credits", "userSearch", "about","userProfile","news"))}}
-<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:15%;height:15%;">}
+<center><h2>Warning</h2> {<img src="images/caution.jpg" alt="Caution" style="width:15%;height:15%;">
 Contains situations involving abuse and trauma.
 
 
