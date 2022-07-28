@@ -1,3 +1,28 @@
 /* notify.min.css, for Harlow Macro API, by Chapel */
-#notify{position:fixed;display:block;width:16em;right:-20em;top:2em;padding:.5em;background-color:#fff;color:#000;font-family:Georgia,serif;font-size:16px;-webkit-transition:right .3s;transition:right .3s;z-index:10000}#notify.open{right:0}
+#notify{
+    position:fixed;
+    display:block;
+    width:9.7em;
+    right:-20em;
+    top:2em;
+    padding:2em;
+    background-color:#FFB000;
+    color:#000;
+    font-size:25px;
+    font-family: 'IBM Plex Mono', monospace;
+    -webkit-transition:right .3s;
+    transition:right .3s;
+    z-index:10000}
+#notify.open{
+    background-color:#FFB000;
+    color:#000;
+    font-size:25px;
+    right:0;
+    user-select: none;
+    font-family: 'IBM Plex Mono', monospace;
+    user-select: none; 
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+}
 /* end notify.min.css*/
