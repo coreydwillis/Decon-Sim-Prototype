@@ -25,7 +25,7 @@ jobs:
           DESCRIPTION: An decon game.
 
           # This must be of the format "N.N.N", where the N's are all numbers
-          VERSION: 0.0.1
+          VERSION: 0.0.1137
 
           # By default, the author will be your name on GitHub. You can manually change this.
           AUTHOR: ${{ github.repository_owner }}
