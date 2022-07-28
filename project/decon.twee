@@ -191,11 +191,6 @@ Contains situations involving abuse and trauma.
 
 (link-fullscreen: "Turn fullscreen on", "Turn fullscreen off", "Fullscreen unavailable")
 <!--{(replace: "Decon")[<b>(text-rotate-y:-40)+(text-rotate-x:+30)+(css: "font-size: 125%;")[**Decon**]</b>]}-->
-{<script type="text/javascript">
-    window.onbeforeunload = function() {
-        return "Please do not refresh the page.";
-    }
-</script>
 <script type="text/javascript">
 function disableF5(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault(); };
 
