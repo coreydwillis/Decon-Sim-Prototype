@@ -264,6 +264,7 @@ $(document).ready(function(){
 (set: $lastPass to (history:)'s last)
 
 :: login
+Test change
 {{(if:$blockedUsers contains $userName)[[[Unauthorized access has been detected and reported|blocked]][(set:$auth to 0)]]
 (if:$attempt is 0)[(set:$attempt to 1)]
 (if:$tryAgain is 2)[(set:$attempt to $attempt + 1)]
