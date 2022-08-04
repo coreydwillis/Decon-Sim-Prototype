@@ -201,6 +201,10 @@ $(document).ready(function(){
 </script>}]}
 
 :: Welcome
+<video oncontextmenu="return false;" width="960" height="720" autoplay>
+  <source src="video/vid1.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 {{(set: $returnExtra to 1)}
 <h2>Loading Simulation...</h2>
 (unless: (track: 'cosmic', 'isplaying'))[
