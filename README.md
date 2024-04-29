@@ -1,4 +1,4 @@
-A narrative game created by Corey Willis.
+A narrative game created by Corey Willis. This is a prototype that I was working on for a while, but I moved on to other projects.
 
 Resources Used by this Game:
 -Tweego
